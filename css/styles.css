@@ -1,0 +1,32 @@
+body {
+    padding-top: 70px;
+}
+
+.customer {
+    padding: 30px;
+}
+
+.search {
+    margin-bottom: 20px;
+}
+
+small {
+    display: block;
+    line-height: 1.428571429;
+    color: #999;
+}
+
+.navbar-nav .btn{
+  margin:8px;
+}
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
