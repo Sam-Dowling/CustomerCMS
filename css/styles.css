@@ -20,3 +20,15 @@ small {
 .navbar-nav .btn{
   margin:8px;
 }
+.sold{
+  background-color: #c5f5b1;
+}
+
+.claimed{
+  background-color: #f6ecb9;
+}
+
+.salebtn{
+  margin-top: 25px;
+  margin-left: 0px;
+}

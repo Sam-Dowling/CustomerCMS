@@ -1,8 +1,10 @@
+<button class="addfields" ng-click="addNewItem()">Add Item</button>
 <form name="myForm" class="transaction">
     <div ng-repeat="item in exchange_cms.transactions[transactionID].items" class="col-xs-6">
         <div class="well">
+
             <div class="form-group row">
-                <label class="col-form-label" for="descriptionInput">Description</label>
+                <label class="col-form-label" for="descriptionInput">Description</label><span style="color:blue" class="pull-right" ng-if="item.sold_date">Sold on {{item.sold_date | date : 'mediumDate'}}</span>
                 <input id="descriptionInput" type="text" name="description" ng-model="item.description" class="form-control" required>
             </div>
 
@@ -21,12 +23,20 @@
                     <input id="priceInput" type="text" name="price" ng-model="item.price" class="form-control" required>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group col-xs-3">
+                    <label class="col-form-label" for="soldInput">Sold Amount</label>
+                    <input id="soldInput" type="text" ng-model="item.sold" class="form-control" ng-readonly="item.sold_date!=null">
+                </div>
+                <div ng-if="item.sold_date==null" class="form-group col-xs-3 salebtn">
+                    <button ng-click="soldItem($index)" class="btn btn-success">Sold</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <br>
-        <div class="form-group">
-            <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary col-md-6 buttons">Back</a>
-            <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-md-6 buttons">Save</button>
-        </div>
+    <div class="form-group">
+        <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary col-md-6 buttons">Back</a>
+        <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-md-6 buttons">Save</button>
+    </div>
 </form>

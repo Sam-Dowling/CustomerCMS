@@ -40,9 +40,9 @@
         <div class="well col-md-9 col-md-offset-3">
             <h4><a href="#/transaction/view/{{exchange_cms._id}}/{{transaction.transaction}}">{{transaction.timestamp | date : 'medium'}}</a></h4>
             <small><i class="fa fa-list"></i> {{transaction.items.length}} Items</small>
-            <br><br>
+            <br>
 
-            <table class="table table-striped table-bordered">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Description</th>
@@ -53,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in transaction.items | filter:search | limitTo:10">
+                    <tr ng-repeat="item in transaction.items | filter:search | limitTo:10 | orderBy: ['sold', 'claimed']" ng-class="(item.sold > 0) ? (item.claimed) ? 'claimed' : 'sold' : ''">
                         <td>{{item.description}}</td>
                         <td>{{item.info}}</td>
                         <td>{{item.size}}</td>

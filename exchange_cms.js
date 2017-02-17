@@ -77,6 +77,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
         var self = this;
 
 
+
         $scope.inputs = [];
         $scope.addfield = function() {
             $scope.inputs.push({})
@@ -101,6 +102,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
     .controller('UpdateTransactionCtrl', function($scope, $location, $routeParams, ExchangeCMS) {
         var self = this;
 
+        var container = {};
+
         $scope.transactionID = $routeParams.transactionID;
 
         ExchangeCMS.get({
@@ -109,6 +112,28 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             self.original = exchange_cms;
             $scope.exchange_cms = new ExchangeCMS(self.original);
         });
+
+        $scope.addNewItem = function() {
+            var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length + 1;
+            $scope.exchange_cms.transactions[$scope.transactionID].items.push({
+                'id': newItemNo,
+                "description": "",
+                "info": "",
+                "size": 0,
+                "price": 0,
+                "sold": 0,
+                "sold_date": null,
+                "claimed": false
+            });
+        };
+
+        $scope.soldItem = function(index) {
+            $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold_date = new Date();
+        };
+
+
+
+
 
         $scope.save = function() {
 
