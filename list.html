@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="customer in exchange_cms.rows | filter:search | orderBy:'doc.name' | limitTo:50">
+            <tr ng-repeat="customer in exchange_cms.rows | filter:search:strict | orderBy:'doc.name' | limitTo:50">
                 <td>{{customer.doc.account_number}}</td>
                 <td><a href="#/customer/view/{{customer.doc._id}}">{{customer.doc.name}}</a></td>
                 <td>{{customer.doc.phone}}</td>

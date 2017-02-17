@@ -87,7 +87,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 "sold": 0,
                 "sold_date": null,
                 "claimed": false,
-                "payed_commission": false
+                "payed_commission": new Date()
             });
         };
 
@@ -146,7 +146,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 "sold": 0,
                 "sold_date": null,
                 "claimed": false,
-                "payed_commission": false
+                "payed_commission": new Date()
             });
         };
 
@@ -177,10 +177,11 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
         });
 
         $scope.save = function() {
-            if (typeof $scope.next_customer_id.rows !== 'undefined' && $scope.next_customer_id.rows > 0) {
-                $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value;
+            if (typeof $scope.next_customer_id.rows === 'undefined' || $scope.next_customer_id.rows == 0) {
+                $scope.exchange_cms.account_number = 200;
             }else{
-              $scope.exchange_cms.account_number = 0;
+              $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value + 200;
+              console.log($scope.exchange_cms.account_number);
             }
 
             $scope.exchange_cms.account_start = new Date();
@@ -207,7 +208,15 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             c: '_view',
             d: 'itemsSold',
             key: "\"" + $routeParams.customerID + "\""
-        })
+        });
+
+        $scope.commissionOwed = ExchangeCMS.get({
+            a: '_design',
+            b: 'customers',
+            c: '_view',
+            d: 'commission',
+            key: "\"" + $routeParams.customerID + "\""
+        });
 
 
         var self = this;
@@ -233,8 +242,19 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                     }
                 }
             }
-            $scope.moneyOwed.rows[0].value = 0;
-            $scope.itemsSold.rows[0].value = 0;
+            $scope.moneyOwed.rows[0].value = "0";
+            $scope.itemsSold.rows[0].value = "0";
+            $scope.save();
+        };
+
+        $scope.payedCommission = function() {
+            var today = new Date();
+            for (var t in $scope.exchange_cms.transactions) {
+                for (var i in $scope.exchange_cms.transactions[t].items) {
+                    $scope.exchange_cms.transactions[t].items[i].payed_commission = today;
+                }
+            }
+            $scope.commissionOwed.rows[0].value = "0";
             $scope.save();
         };
     })
