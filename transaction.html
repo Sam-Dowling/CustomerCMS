@@ -30,12 +30,12 @@
 
                 <div class="col-xs-6" style="padding-right:0px">
                     <label class="col-form-label" for="priceInput">Price</label>
-                    <input id="priceInput" type="text" name="price" ng-model="item.price" class="form-control" required>
+                    <input id="priceInput" name="price" ng-model="item.price" class="form-control" required>
                 </div>
             </div>
             <div class="input-group col-xs-4">
                 <span class="input-group-addon" id="search-icon"><i class="fa fa-euro"></i></span>
-                <input id="soldInput" type="text" ng-model="item.sold" class="form-control" ng-readonly="item.sold_date!=null">
+                <input id="soldInput" ng-model="item.sold" class="form-control" ng-readonly="item.sold_date!=null">
                 <span class="input-group-btn">
                   <button ng-click="soldItem($index)" class="btn btn-success" type="button" ng-disabled="item.sold_date!=null">Sold</button>
                 </span>

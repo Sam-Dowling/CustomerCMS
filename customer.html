@@ -9,7 +9,7 @@
             <p><i class="fa fa-calendar"></i> {{exchange_cms.account_start | date : 'mediumDate'}}</p>
             <div class="row padded">
               <a class="btn btn-success col-xs-6" href="#/transaction/new/{{exchange_cms._id}}"><i class="fa fa-dollar"></i> Payed Commission</a>
-              <a class="btn btn-warning col-xs-6" href="#/transaction/new/{{exchange_cms._id}}"><i class="fa fa-dollar"></i> Paid for Sold Items</a>
+              <a class="btn btn-warning col-xs-6" ng-click="payOutForSoldItems()"><i class="fa fa-dollar"></i> Pay Out for Sold Items</a>
             </div>
             <div class="row padded">
               <a class="btn btn-primary col-xs-12" href="#/transaction/new/{{exchange_cms._id}}"><i class="fa fa-plus"></i> New Transaction</a>
@@ -20,10 +20,10 @@
         <div class="row">
             <ul class="well list-group col-md-12">
                 <li class="list-group-item">
-                    <span class="badge">&euro; {{moneyOwed.rows[0].value}}</span> Amount Due For Sold Items
+                    <span class="badge">&euro; {{moneyOwed.rows[0].value || "0"}}</span> Amount Due For Sold Items
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{itemsSold.rows[0].value}}</span> Items Sold
+                    <span class="badge">{{itemsSold.rows[0].value || "0"}}</span> Items Sold
                 </li>
                 <li class="list-group-item">
                     <span class="badge">€32</span> Commission To Pay

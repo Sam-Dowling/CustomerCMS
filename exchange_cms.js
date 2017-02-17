@@ -86,7 +86,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 "price": 0,
                 "sold": 0,
                 "sold_date": null,
-                "claimed": false
+                "claimed": false,
+                "payed_commission": false
             });
         };
 
@@ -144,13 +145,18 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 "price": 0,
                 "sold": 0,
                 "sold_date": null,
-                "claimed": false
+                "claimed": false,
+                "payed_commission": false
             });
         };
 
         $scope.soldItem = function(index) {
-            if ($scope.exchange_cms.transactions[$scope.transactionID].items[index].sold > 0) {
+            var sold = parseFloat($scope.exchange_cms.transactions[$scope.transactionID].items[index].sold);
+            if (sold && sold > 0) {
+                $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold = sold;
                 $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold_date = new Date();
+            } else {
+                $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold = 0;
             }
         };
 
@@ -171,7 +177,12 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
         });
 
         $scope.save = function() {
-            $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value + 1;
+            if (typeof $scope.next_customer_id.rows !== 'undefined' && $scope.next_customer_id.rows > 0) {
+                $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value;
+            }else{
+              $scope.exchange_cms.account_number = 0;
+            }
+
             $scope.exchange_cms.account_start = new Date();
             $scope.exchange_cms.transactions = [];
             ExchangeCMS.save($scope.exchange_cms, function(exchange_cms) {
@@ -181,6 +192,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
     })
 
     .controller('UpdateCustomerCtrl', function($scope, $location, $routeParams, ExchangeCMS) {
+
         $scope.moneyOwed = ExchangeCMS.get({
             a: '_design',
             b: 'customers',
@@ -195,7 +207,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             c: '_view',
             d: 'itemsSold',
             key: "\"" + $routeParams.customerID + "\""
-        });
+        })
+
 
         var self = this;
 
@@ -211,7 +224,20 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 $location.path('/customer/view/' + $scope.exchange_cms._id);
             });
         };
-      })
+
+        $scope.payOutForSoldItems = function() {
+            for (var t in $scope.exchange_cms.transactions) {
+                for (var i in $scope.exchange_cms.transactions[t].items) {
+                    if ($scope.exchange_cms.transactions[t].items[i].sold > 0 && !$scope.exchange_cms.transactions[t].items[i].claimed) {
+                        $scope.exchange_cms.transactions[t].items[i].claimed = true;
+                    }
+                }
+            }
+            $scope.moneyOwed.rows[0].value = 0;
+            $scope.itemsSold.rows[0].value = 0;
+            $scope.save();
+        };
+    })
 
     .controller('UpdateCtrl', function($scope, $location, $routeParams, ExchangeCMS) {
 
