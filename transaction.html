@@ -1,24 +1,32 @@
+<form name="myForm" class="transaction">
+    <div ng-repeat="item in exchange_cms.transactions[transactionID].items" class="col-xs-6">
+        <div class="well">
+            <div class="form-group row">
+                <label class="col-form-label" for="descriptionInput">Description</label>
+                <input id="descriptionInput" type="text" name="description" ng-model="item.description" class="form-control" required>
+            </div>
 
-<form name="myForm" class="well col-md-6 col-md-offset-3">
+            <div class="form-group row">
+                <label class="col-form-label" for="info">Extra Information</label>
+                <input id="infoInput" type="text" name="address" ng-model="item.info" class="form-control">
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-6">
+                    <label class="col-form-label" for="sizeInput">Size</label>
+                    <input id="sizeInput" type="text" name="size" ng-model="item.size" class="form-control" required>
+                </div>
 
-    <div class="form-group row">
-        <label class="col-form-label" for="nameInput">Name</label>
-        <input id="nameInput" type="text" name="name" ng-model="exchange_cms.name" class="form-control" required>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-form-label" for="dob">Address</label>
-        <input id="addressInput" type="text" name="address" ng-model="exchange_cms.address" class="form-control" required>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-form-label" for="phoneInput">Phone Number</label>
-        <input id="phoneInput" name="phone" ng-model="exchange_cms.phone" class="form-control" required>
+                <div class="form-group col-xs-6">
+                    <label class="col-form-label" for="priceInput">Price</label>
+                    <input id="priceInput" type="text" name="price" ng-model="item.price" class="form-control" required>
+                </div>
+            </div>
+        </div>
     </div>
 
     <br>
-    <div class="form-group row">
-        <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary col-md-6">Back</a>
-        <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-md-6">Save</button>
-    </div>
+        <div class="form-group">
+            <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary col-md-6 buttons">Back</a>
+            <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-md-6 buttons">Save</button>
+        </div>
 </form>

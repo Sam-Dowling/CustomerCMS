@@ -49,8 +49,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 controller: 'CreateTransactionCtrl',
                 templateUrl: 'transaction.html'
             })
-            .when('/transaction/view/:transactionID', {
-                controller: 'UpdateCtrl',
+            .when('/transaction/view/:customerID/:transactionID', {
+                controller: 'UpdateTransactionCtrl',
                 templateUrl: 'transaction.html'
             })
             .otherwise({
@@ -70,21 +70,52 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             d: 'all',
             include_docs: 'true'
         });
+
     })
 
-    .controller('CreateTransactionCtrl', function($scope, $location, ExchangeCMS) {
+    .controller('CreateTransactionCtrl', function($scope, $location, $routeParams, ExchangeCMS) {
+        var self = this;
+
+
         $scope.inputs = [];
         $scope.addfield = function() {
             $scope.inputs.push({})
         }
+
+        ExchangeCMS.get({
+            a: $routeParams.customerID
+        }, function(exchange_cms) {
+            self.original = exchange_cms;
+            $scope.exchange_cms = new ExchangeCMS(self.original);
+        });
+
         $scope.save = function() {
-            $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value + 1;
-            $scope.exchange_cms.account_start = new Date();
-            $scope.exchange_cms.transactions = [];
-            ExchangeCMS.save($scope.exchange_cms, function(exchange_cms) {
-                $location.path('/');
+            var transactionID = $scope.transactions.length;
+
+            $scope.exchange_cms.update(function() {
+                $location.path('/customer/view/' + $scope.exchange_cms._id);
             });
-        }
+        };
+    })
+
+    .controller('UpdateTransactionCtrl', function($scope, $location, $routeParams, ExchangeCMS) {
+        var self = this;
+
+        $scope.transactionID = $routeParams.transactionID;
+
+        ExchangeCMS.get({
+            a: $routeParams.customerID
+        }, function(exchange_cms) {
+            self.original = exchange_cms;
+            $scope.exchange_cms = new ExchangeCMS(self.original);
+        });
+
+        $scope.save = function() {
+
+            $scope.exchange_cms.update(function() {
+                $location.path('/customer/view/' + $scope.exchange_cms._id);
+            });
+        };
     })
 
     .controller('CreateCtrl', function($scope, $location, ExchangeCMS) {
@@ -115,6 +146,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             self.original = exchange_cms;
             $scope.exchange_cms = new ExchangeCMS(self.original);
         });
+
+
 
         $scope.destroy = function() {
             self.original.destroy(function() {

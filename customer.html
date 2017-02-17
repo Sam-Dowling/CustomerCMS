@@ -15,13 +15,13 @@
       <div class="row">
         <ul class="well list-group col-md-12">
             <li class="list-group-item">
-                <span class="badge">74</span> Items Brought In
+                <span class="badge">10</span> Amount Due For Sold Items
             </li>
             <li class="list-group-item">
                 <span class="badge">42</span> Items Sold
             </li>
             <li class="list-group-item">
-                <span class="badge">€32</span> Commission Owed
+                <span class="badge">€32</span> Commission To Pay
             </li>
         </ul>
       </div>
@@ -38,7 +38,7 @@
 <div ng-repeat="transaction in exchange_cms.transactions | filter:search | orderBy:'transaction.timestamp'">
     <div class="row">
         <div class="well col-md-9 col-md-offset-3">
-            <h4>{{transaction.timestamp | date : 'medium'}}</h4>
+            <h4><a href="#/transaction/view/{{exchange_cms._id}}/{{transaction.transaction}}">{{transaction.timestamp | date : 'medium'}}</a></h4>
             <small><i class="fa fa-list"></i> {{transaction.items.length}} Items</small>
             <br><br>
 

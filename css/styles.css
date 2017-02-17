@@ -2,10 +2,9 @@ body {
     padding-top: 70px;
 }
 
-.customer {
+.well {
     padding: 30px;
 }
-
 .search {
     margin-bottom: 20px;
 }
@@ -15,18 +14,9 @@ small {
     line-height: 1.428571429;
     color: #999;
 }
-
+.buttons{
+  margin-top: 10px;
+}
 .navbar-nav .btn{
   margin:8px;
-}
-.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display:         flex;
-  flex-wrap: wrap;
-}
-.row > [class*='col-'] {
-  display: flex;
-  flex-direction: column;
 }
