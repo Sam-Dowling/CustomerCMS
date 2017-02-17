@@ -35,7 +35,7 @@
 </div>
 
 
-<div ng-repeat="transaction in exchange_cms.transactions | filter:search | orderBy:'transaction.timestamp'">
+<div ng-repeat="transaction in exchange_cms.transactions | filter:search | orderBy:'-timestamp'">
     <div class="row">
         <div class="well col-md-9 col-md-offset-3">
             <h4><a href="#/transaction/view/{{exchange_cms._id}}/{{transaction.transaction}}">{{transaction.timestamp | date : 'medium'}}</a></h4>

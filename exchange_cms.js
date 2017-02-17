@@ -47,7 +47,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             })
             .when('/transaction/new/:customerID', {
                 controller: 'CreateTransactionCtrl',
-                templateUrl: 'transaction.html'
+                templateUrl: 'newTransaction.html'
             })
             .when('/transaction/view/:customerID/:transactionID', {
                 controller: 'UpdateTransactionCtrl',
@@ -76,23 +76,46 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
     .controller('CreateTransactionCtrl', function($scope, $location, $routeParams, ExchangeCMS) {
         var self = this;
 
-
-
-        $scope.inputs = [];
-        $scope.addfield = function() {
-            $scope.inputs.push({})
-        }
+        $scope.addNewItem = function() {
+            var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length;
+            $scope.exchange_cms.transactions[$scope.transactionID].items.push({
+                'id': newItemNo,
+                "description": "",
+                "info": "",
+                "size": 0,
+                "price": 0,
+                "sold": 0,
+                "sold_date": null,
+                "claimed": false
+            });
+        };
 
         ExchangeCMS.get({
             a: $routeParams.customerID
         }, function(exchange_cms) {
             self.original = exchange_cms;
             $scope.exchange_cms = new ExchangeCMS(self.original);
+
+            $scope.transactionID = $scope.exchange_cms.transactions.length;
+
+            $scope.exchange_cms.transactions[$scope.transactionID] = {
+                'transaction': $scope.transactionID,
+                "items": []
+            };
+            $scope.addNewItem();
         });
 
-        $scope.save = function() {
-            var transactionID = $scope.transactions.length;
+        $scope.removeItem = function(index) {
+            var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length;
+            $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
 
+            for(i in $scope.exchange_cms.transactions[$scope.transactionID].items){
+              $scope.exchange_cms.transactions[$scope.transactionID].items[i].transaction = i;
+            }
+        };
+
+        $scope.save = function() {
+            $scope.exchange_cms.transactions[$scope.transactionID].timestamp = new Date();
             $scope.exchange_cms.update(function() {
                 $location.path('/customer/view/' + $scope.exchange_cms._id);
             });
@@ -101,8 +124,6 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
 
     .controller('UpdateTransactionCtrl', function($scope, $location, $routeParams, ExchangeCMS) {
         var self = this;
-
-        var container = {};
 
         $scope.transactionID = $routeParams.transactionID;
 
@@ -131,12 +152,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold_date = new Date();
         };
 
-
-
-
-
         $scope.save = function() {
-
             $scope.exchange_cms.update(function() {
                 $location.path('/customer/view/' + $scope.exchange_cms._id);
             });
