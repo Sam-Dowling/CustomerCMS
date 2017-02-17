@@ -1,10 +1,20 @@
-<button class="addfields" ng-click="addNewItem()">Add Item</button>
-<form name="myForm" class="transaction">
-    <div ng-repeat="item in exchange_cms.transactions[transactionID].items" class="col-xs-6">
-        <div class="well">
+<div id="transaction">
+    <div class="row well">
+        <div class="col-xs-4">
+            <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+        </div>
+        <div class="col-xs-4 col-xs-offset-4">
+            <button class="addfields btn btn-primary col-xs-5" ng-click="addNewItem()"><i class="fa fa-plus"></i> Add Item</button>
+            <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-xs-5 col-xs-offset-1"><i class="fa fa-download"></i> Save</button>
+        </div>
+    </div>
+
+    <form name="myForm">
+        <div ng-repeat="item in exchange_cms.transactions[transactionID].items" class="well well-lg col-xs-6">
 
             <div class="form-group row">
-                <label class="col-form-label" for="descriptionInput">Description</label><span style="color:blue" class="pull-right" ng-if="item.sold_date">Sold on {{item.sold_date | date : 'mediumDate'}}</span>
+                <label class="col-form-label" for="descriptionInput">Description</label>
+                <label class="col-form-label pull-right sold-text" for="descriptionInput" ng-if="item.sold_date"><i class="fa fa-check-circle"></i> Sold on {{item.sold_date | date : 'mediumDate'}}</label>
                 <input id="descriptionInput" type="text" name="description" ng-model="item.description" class="form-control" required>
             </div>
 
@@ -12,31 +22,24 @@
                 <label class="col-form-label" for="info">Extra Information</label>
                 <input id="infoInput" type="text" name="address" ng-model="item.info" class="form-control">
             </div>
-            <div class="row">
-                <div class="form-group col-xs-6">
+            <div class="form-group row">
+                <div class="col-xs-6" style="padding-left:0px">
                     <label class="col-form-label" for="sizeInput">Size</label>
                     <input id="sizeInput" type="text" name="size" ng-model="item.size" class="form-control" required>
                 </div>
 
-                <div class="form-group col-xs-6">
+                <div class="col-xs-6" style="padding-right:0px">
                     <label class="col-form-label" for="priceInput">Price</label>
                     <input id="priceInput" type="text" name="price" ng-model="item.price" class="form-control" required>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-xs-3">
-                    <label class="col-form-label" for="soldInput">Sold Amount</label>
-                    <input id="soldInput" type="text" ng-model="item.sold" class="form-control" ng-readonly="item.sold_date!=null">
-                </div>
-                <div ng-if="item.sold_date==null" class="form-group col-xs-3 salebtn">
-                    <button ng-click="soldItem($index)" class="btn btn-success">Sold</button>
-                </div>
+            <div class="input-group col-xs-4">
+                <span class="input-group-addon" id="search-icon"><i class="fa fa-euro"></i></span>
+                <input id="soldInput" type="text" ng-model="item.sold" class="form-control" ng-readonly="item.sold_date!=null">
+                <span class="input-group-btn">
+                  <button ng-click="soldItem($index)" class="btn btn-success" type="button" ng-disabled="item.sold_date!=null">Sold</button>
+                </span>
             </div>
         </div>
-    </div>
-
-    <div class="form-group">
-        <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary col-md-6 buttons">Back</a>
-        <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-md-6 buttons">Save</button>
-    </div>
-</form>
+    </form>
+</div>

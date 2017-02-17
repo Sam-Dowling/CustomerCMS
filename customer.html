@@ -1,34 +1,39 @@
 <div class="row">
 
-    <div class="col-md-3">
+    <div class="info-box col-xs-4">
         <div class="well well-sm">
             <h4><a href="#/customer/edit/{{exchange_cms._id}}">{{exchange_cms.name}}</a></h4>
             <small><i class="fa fa-globe"></i> {{exchange_cms.address}}</small>
             <br>
             <p><i class="fa fa-phone"></i> {{exchange_cms.phone}}</p>
             <p><i class="fa fa-calendar"></i> {{exchange_cms.account_start | date : 'mediumDate'}}</p>
-            <br>
-            <a class="btn btn-primary" href="#/transaction/new/{{exchange_cms._id}}"><i class="fa fa-plus"></i> New Transaction</a>
+            <div class="row padded">
+              <a class="btn btn-success col-xs-6" href="#/transaction/new/{{exchange_cms._id}}"><i class="fa fa-dollar"></i> Payed Commission</a>
+              <a class="btn btn-warning col-xs-6" href="#/transaction/new/{{exchange_cms._id}}"><i class="fa fa-dollar"></i> Paid for Sold Items</a>
+            </div>
+            <div class="row padded">
+              <a class="btn btn-primary col-xs-12" href="#/transaction/new/{{exchange_cms._id}}"><i class="fa fa-plus"></i> New Transaction</a>
+            </div>
         </div>
     </div>
-    <div class="col-md-9">
-      <div class="row">
-        <ul class="well list-group col-md-12">
-            <li class="list-group-item">
-                <span class="badge">10</span> Amount Due For Sold Items
-            </li>
-            <li class="list-group-item">
-                <span class="badge">42</span> Items Sold
-            </li>
-            <li class="list-group-item">
-                <span class="badge">€32</span> Commission To Pay
-            </li>
-        </ul>
-      </div>
+    <div class="col-md-8">
+        <div class="row">
+            <ul class="well list-group col-md-12">
+                <li class="list-group-item">
+                    <span class="badge">&euro; {{moneyOwed.rows[0].value}}</span> Amount Due For Sold Items
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">{{itemsSold.rows[0].value}}</span> Items Sold
+                </li>
+                <li class="list-group-item">
+                    <span class="badge">€32</span> Commission To Pay
+                </li>
+            </ul>
+        </div>
         <div class="row">
             <div class="input-group search">
-                <span class="input-group-addon" id="search-icon"><i class="fa fa-search"></i></span>
-                <input type="text" ng-model="search" class="form-control" aria-describedby="search-icon" placeholder="Search..."></input>
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" ng-model="search" class="form-control" placeholder="Search..."></input>
             </div>
         </div>
     </div>
@@ -37,7 +42,7 @@
 
 <div ng-repeat="transaction in exchange_cms.transactions | filter:search | orderBy:'-timestamp'">
     <div class="row">
-        <div class="well col-md-9 col-md-offset-3">
+        <div class="well">
             <h4><a href="#/transaction/view/{{exchange_cms._id}}/{{transaction.transaction}}">{{transaction.timestamp | date : 'medium'}}</a></h4>
             <small><i class="fa fa-list"></i> {{transaction.items.length}} Items</small>
             <br>

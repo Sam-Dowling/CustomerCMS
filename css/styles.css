@@ -1,34 +1,56 @@
 body {
     padding-top: 70px;
+    background-color: rgb(121, 103, 126)
 }
-
-.well {
-    padding: 30px;
+.navbar-brand{
+  font-family: "Times New Roman", Times, serif;
+  font-size: 26px;
 }
 .search {
     margin-bottom: 20px;
+
+}
+.list-group-item, .badge{
+  font-size: 15px;
+}
+.list-group{
+  padding: 23px;
 }
 
+.table{
+  background-color: white;
+}
+.table .sold{
+  background-color: #c5f5b1;
+}
+.info-box{
+  padding-left: 0px;
+  padding-right:20px;
+}
+.table .claimed{
+  background-color: #f6ecb9;
+}
+.padded{
+  padding-left:9px;
+  padding-right:9px;
+  margin-top: 5px;
+}
 small {
-    display: block;
-    line-height: 1.428571429;
-    color: #999;
+  display: block;
+  line-height: 1.428571429;
+  color: #737373;
 }
-.buttons{
-  margin-top: 10px;
-}
+
 .navbar-nav .btn{
   margin:8px;
 }
-.sold{
-  background-color: #c5f5b1;
+
+
+.sold-text{
+  color: rgb(47, 120, 74)
 }
 
-.claimed{
-  background-color: #f6ecb9;
-}
-
-.salebtn{
-  margin-top: 25px;
-  margin-left: 0px;
+#transaction .row {
+    margin-left: 0;
+    margin-right: 0;
 }
