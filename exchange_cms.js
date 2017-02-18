@@ -82,8 +82,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 'id': newItemNo,
                 "description": "",
                 "info": "",
-                "size": 0,
-                "price": 0,
+                "size": "",
+                "price": null,
                 "sold": 0,
                 "sold_date": null,
                 "claimed": false,
@@ -108,11 +108,14 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
 
         $scope.removeItem = function(index) {
             var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length;
-            $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
+            if(newItemNo != 1){
+              $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
 
-            for (i in $scope.exchange_cms.transactions[$scope.transactionID].items) {
-                $scope.exchange_cms.transactions[$scope.transactionID].items[i].transaction = i;
+              for (i in $scope.exchange_cms.transactions[$scope.transactionID].items) {
+                  $scope.exchange_cms.transactions[$scope.transactionID].items[i].transaction = i;
+              }
             }
+
         };
 
         $scope.save = function() {
@@ -141,8 +144,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 'id': newItemNo,
                 "description": "",
                 "info": "",
-                "size": 0,
-                "price": 0,
+                "size": "",
+                "price": null,
                 "sold": 0,
                 "sold_date": null,
                 "claimed": false,

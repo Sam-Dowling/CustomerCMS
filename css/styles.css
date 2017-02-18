@@ -1,6 +1,6 @@
 body {
     padding-top: 70px;
-    background-color: rgb(121, 103, 126)
+    background-color: rgb(168, 140, 90)
 }
 .navbar-brand{
   font-family: "Times New Roman", Times, serif;
@@ -10,7 +10,10 @@ body {
     margin-bottom: 20px;
 
 }
-
+.customerName a{
+  text-transform: capitalize;
+  color: black
+}
 .list-group-item, .badge{
   font-size: 15px;
 }
@@ -55,3 +58,19 @@ small {
     margin-left: 0;
     margin-right: 0;
 }
+
+
+/*.btnCommission{
+  background-color: rgb(228, 120, 66);
+  color: white
+}
+
+.btnSold{
+  background-color: rgb(228, 66, 66);
+  color: white
+}
+
+.btnYellow{
+  color: white;
+  background-color: rgb(155, 182, 61);
+}*/
