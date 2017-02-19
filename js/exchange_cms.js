@@ -108,12 +108,12 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
 
         $scope.removeItem = function(index) {
             var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length;
-            if(newItemNo != 1){
-              $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
+            if (newItemNo != 1) {
+                $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
 
-              for (i in $scope.exchange_cms.transactions[$scope.transactionID].items) {
-                  $scope.exchange_cms.transactions[$scope.transactionID].items[i].transaction = i;
-              }
+                for (i in $scope.exchange_cms.transactions[$scope.transactionID].items) {
+                    $scope.exchange_cms.transactions[$scope.transactionID].items[i].transaction = i;
+                }
             }
 
         };
@@ -160,10 +160,14 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold_date = new Date();
             } else {
                 $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold = 0;
+                $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold_date = null;
             }
         };
 
         $scope.save = function() {
+            for(var i in $scope.exchange_cms.transactions[$scope.transactionID].items){
+              $scope.soldItem(i);
+            }
             $scope.exchange_cms.update(function() {
                 $location.path('/customer/view/' + $scope.exchange_cms._id);
             });
@@ -182,9 +186,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
         $scope.save = function() {
             if (typeof $scope.next_customer_id.rows === 'undefined' || $scope.next_customer_id.rows == 0) {
                 $scope.exchange_cms.account_number = 200;
-            }else{
-              $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value + 200;
-              console.log($scope.exchange_cms.account_number);
+            } else {
+                $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value + 200;
             }
 
             $scope.exchange_cms.account_start = new Date();
