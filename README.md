@@ -33,3 +33,12 @@
   "language": "javascript"
 }
 ```
+
+
+#### Credits
+
+This project uses
+- [AngularJS](https://angularjs.org/)
+- [CouchDB](http://couchdb.apache.org/)
+- [Bootstrap](http://getbootstrap.com/)
+- [Flat UI](http://designmodo.github.io/Flat-UI/)
