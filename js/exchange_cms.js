@@ -160,6 +160,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold_date = new Date();
             } else {
                 $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold = 0;
+                $scope.exchange_cms.transactions[$scope.transactionID].items[index].sold_date = null;
             }
         };
 
