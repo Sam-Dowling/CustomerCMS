@@ -1,6 +1,4 @@
 <form name="myForm" class="well well-lg col-xs-6 col-xs-offset-3">
-    <h3 class="well-title">Customer Details</h3>
-
     <div class="form-group row">
         <label class="col-form-label" for="nameInput">Name</label>
         <input id="nameInput" type="text" name="name" ng-model="exchange_cms.name" class="form-control" required>
@@ -17,7 +15,7 @@
     </div>
 
     <div class="row">
-        <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary col-xs-3">Back</a>
-        <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-xs-3 pull-right">Save</button>
+        <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary col-xs-3"><i class="fui-arrow-left"></i> Back</a>
+        <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-xs-3 pull-right"><i class="fui-check"></i> Save</button>
     </div>
 </form>

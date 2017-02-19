@@ -1,34 +1,36 @@
-<!doctype html>
 <html ng-app="exchange_cms">
 
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/flat-ui.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-resource.min.js"></script>
-    <script src="js/angular-route.min.js"></script>
-    <script src="exchange_cms.js"></script>
     <title>The Exchange</title>
 </head>
 
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">The Exchange <i class="fa fa-pagelines"></i></a>
-          </div>
-          <div id="navbar">
-            <div class="nav navbar-nav navbar-right">
-              <a class="btn btn-primary" href="#/customer/new"><i class="fa fa-plus"></i> New Customer</a>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">The Exchange <i class="fui-cmd"></i></a>
             </div>
-          </div><!--/.nav-collapse -->
+            <div id="navbar">
+                <div class="nav navbar-nav navbar-right">
+                    <a class="btn btn-primary" href="#/customer/new"><i class="fui-user"></i> New Customer</a>
+                </div>
+            </div>
+            <!--/.nav-collapse -->
         </div>
-      </nav>
+    </nav>
 
     <div class="container" ng-view></div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-resource.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/exchange_cms.js"></script>
 
 </body>
 

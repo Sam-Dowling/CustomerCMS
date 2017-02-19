@@ -1,45 +1,50 @@
 <div id="transaction">
     <div class="row well">
         <div class="col-xs-4">
-            <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+            <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary"><i class="fui-arrow-left"></i> Back</a>
         </div>
         <div class="col-xs-4 col-xs-offset-4">
-            <button class="addfields btn btn-primary col-xs-5" ng-click="addNewItem()"><i class="fa fa-plus"></i> Add Item</button>
-            <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-xs-5 col-xs-offset-1"><i class="fa fa-download"></i> Save</button>
+            <button class="addfields btn btn-primary col-xs-5" ng-click="addNewItem()"><i class="fui-plus"></i> Add Item</button>
+            <button ng-click="save()" ng-disabled="myForm.$invalid" class="btn btn-success col-xs-5 col-xs-offset-1"><i class="fui-check"></i> Save</button>
         </div>
     </div>
 
     <form name="myForm">
-        <div ng-repeat="item in exchange_cms.transactions[transactionID].items" class="well well-lg col-xs-6">
+        <div ng-repeat="item in exchange_cms.transactions[transactionID].items | orderBy: 'sold'" class="well well-lg col-xs-6">
 
             <div class="form-group row">
                 <label class="col-form-label" for="descriptionInput">Description</label>
-                <label class="col-form-label pull-right sold-text" for="descriptionInput" ng-if="item.sold_date"><i class="fa fa-check-circle"></i> Sold on {{item.sold_date | date : 'mediumDate'}}</label>
-                <input id="descriptionInput" type="text" name="description" ng-model="item.description" class="form-control" required>
+                <label class="col-form-label sold-text pull-right" for="descriptionInput" ng-if="item.sold_date"><i class="fui-check-circle"></i> Sold on {{item.sold_date | date : 'mediumDate'}}</label>
+                <input id="descriptionInput" type="text" name="description" ng-model="item.description" class="form-control" required />
             </div>
 
             <div class="form-group row">
                 <label class="col-form-label" for="info">Extra Information</label>
-                <input id="infoInput" type="text" name="address" ng-model="item.info" class="form-control">
+                <input id="infoInput" type="text" name="address" ng-model="item.info" class="form-control" placeholder="Optional">
             </div>
             <div class="form-group row">
-                <div class="col-xs-6" style="padding-left:0px">
+
+                <div class="form-group col-xs-6" style="padding-left:0px">
                     <label class="col-form-label" for="sizeInput">Size</label>
-                    <input id="sizeInput" type="text" name="size" ng-model="item.size" class="form-control" required>
+                    <input id="sizeInput" type="text" name="size" ng-model="item.size" class="form-control" required />
                 </div>
 
-                <div class="col-xs-6" style="padding-right:0px">
+                <div class="form-group col-xs-6" style="padding-right:0px">
                     <label class="col-form-label" for="priceInput">Price</label>
-                    <input id="priceInput" name="price" ng-model="item.price" class="form-control" required>
+                    <input id="priceInput" name="price" ng-model="item.price" class="form-control" required />
                 </div>
+
             </div>
-            <div class="input-group col-xs-4">
-                <span class="input-group-addon" id="search-icon"><i class="fa fa-euro"></i></span>
-                <input id="soldInput" ng-model="item.sold" class="form-control" ng-readonly="item.sold_date!=null">
-                <span class="input-group-btn">
-                  <button ng-click="soldItem($index)" class="btn btn-success" type="button" ng-disabled="item.sold_date!=null">Sold</button>
-                </span>
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="input-group focus">
+                        <span class="input-group-addon" style="font-size:18px">&euro;</span>
+                        <input id="soldInput" ng-model="item.sold" class="form-control sold-amount" ng-readonly="item.sold_date!=null" />
+                    </div>
+                </div>
+                <button ng-click="soldItem($index)" class="btn btn-primary col-xs-3" ng-disabled="item.sold_date!=null"><i class="fui-heart"></i> Sold</button>
             </div>
+
         </div>
     </form>
 </div>
