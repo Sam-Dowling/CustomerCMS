@@ -137,7 +137,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
 
         $scope.addNewItem = function() {
             var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length + 1;
-            $scope.exchange_cms.transactions[$scope.transactionID].items.push({
+            $scope.exchange_cms.transactions[$scope.transactionID].items.unshift({
                 'id': newItemNo,
                 "description": "",
                 "info": "",
