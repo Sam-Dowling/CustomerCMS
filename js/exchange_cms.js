@@ -78,7 +78,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
 
         $scope.addNewItem = function() {
             var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length;
-            $scope.exchange_cms.transactions[$scope.transactionID].items.push({
+            $scope.exchange_cms.transactions[$scope.transactionID].items.unshift({
                 'id': newItemNo,
                 "description": "",
                 "info": "",
@@ -107,15 +107,12 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
         });
 
         $scope.removeItem = function(index) {
-            var newItemNo = $scope.exchange_cms.transactions[$scope.transactionID].items.length;
-            if (newItemNo != 1) {
+            if ($scope.exchange_cms.transactions[$scope.transactionID].items.length > 1) {
                 $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
-
-                for (i in $scope.exchange_cms.transactions[$scope.transactionID].items) {
-                    $scope.exchange_cms.transactions[$scope.transactionID].items[i].transaction = i;
+                for (var i = 0; i < $scope.exchange_cms.transactions[$scope.transactionID].items.length; i++) {
+                    $scope.exchange_cms.transactions[$scope.transactionID].items[i].id= i;
                 }
             }
-
         };
 
         $scope.save = function() {
@@ -165,8 +162,8 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
         };
 
         $scope.save = function() {
-            for(var i in $scope.exchange_cms.transactions[$scope.transactionID].items){
-              $scope.soldItem(i);
+            for (var i in $scope.exchange_cms.transactions[$scope.transactionID].items) {
+                $scope.soldItem(i);
             }
             $scope.exchange_cms.update(function() {
                 $location.path('/customer/view/' + $scope.exchange_cms._id);
