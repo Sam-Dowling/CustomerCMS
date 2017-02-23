@@ -62,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in transaction.items | filter:search | limitTo:10 | orderBy: ['claimed','sold']" ng-class="(item.sold > 0) ? (item.claimed) ? 'claimed' : 'sold' : ''">
+                    <tr ng-repeat="item in transaction.items | filter:search | orderBy: 'id'" ng-class="(item.sold > 0) ? (item.claimed) ? 'claimed' : 'sold' : ''">
                         <th>{{item.id + 1}}</th>
                         <td>{{item.description}}</td>
                         <td>{{item.info}}</td>
