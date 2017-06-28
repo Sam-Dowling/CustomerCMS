@@ -162,9 +162,6 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
         $scope.removeItem = function(index) {
             if ($scope.exchange_cms.transactions[$scope.transactionID].items.length > 1) {
                 $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
-                for (var i = 0; i < $scope.exchange_cms.transactions[$scope.transactionID].items.length; i++) {
-                    $scope.exchange_cms.transactions[$scope.transactionID].items[i].id= i;
-                }
             }
         };
 
