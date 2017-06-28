@@ -105,6 +105,12 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
       $scope.addNewItem();
     });
 
+    $scope.goBack = function() {
+      if (confirm('Go back without saving?')) {
+        $location.path('/customer/view/' + $scope.exchange_cms._id);
+      }
+    };
+
     $scope.removeItem = function(index) {
       if ($scope.exchange_cms.transactions[$scope.transactionID].items.length > 1) {
         $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
@@ -251,7 +257,9 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
     };
 
     $scope.deleteCustomer = function() {
-      if (confirm('Are you SURE you want to DELETE this customer and EVERY ITEM associated with this Customer???')) {
+      if (confirm('Are you SURE you want to DELETE this customer and EVERY ITEM associated with this Customer?')) {
+        var answer = prompt("This action CANNOT be undone.\nPlease type the name of the customer to confirm.")
+        if(answer != null && answer.trim().toLowerCase() === $scope.exchange_cms.name.toLowerCase())
         $scope.exchange_cms.destroy(function() {
           $location.path('/');
         });
