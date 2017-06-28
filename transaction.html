@@ -1,8 +1,8 @@
 <div id="transaction">
     <div class="row well">
         <div class="col-xs-4">
-            <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary"><i class="fui-arrow-left"></i> Back</a>
-            <button ng-click="deleteTransaction()" ng-really-message="Are you sure you want to DELETE every item in this transaction?" class="btn btn-danger" style=""><i class="fui-trash"></i>Delete Transaction</button>
+            <button ng-click="goBack()" class="btn btn-primary"><i class="fui-arrow-left"></i> Back</button>
+            <button ng-click="deleteTransaction()" class="btn btn-danger" style=""><i class="fui-trash"></i>Delete Transaction</button>
         </div>
         <div class="col-xs-4 col-xs-offset-4">
             <button class="addfields btn btn-primary col-xs-5" ng-click="addNewItem()"><i class="fui-plus"></i> Add Item</button>
