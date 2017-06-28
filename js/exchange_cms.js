@@ -86,8 +86,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 "price": null,
                 "sold": 0,
                 "sold_date": null,
-                "claimed": false,
-                "payed_commission": new Date()
+                "claimed": false
             });
         };
 
@@ -145,8 +144,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
                 "price": null,
                 "sold": 0,
                 "sold_date": null,
-                "claimed": false,
-                "payed_commission": new Date()
+                "claimed": false
             });
         };
 
@@ -231,14 +229,6 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             key: "\"" + $routeParams.customerID + "\""
         });
 
-        $scope.commissionOwed = ExchangeCMS.get({
-            a: '_design',
-            b: 'customers',
-            c: '_view',
-            d: 'commission',
-            key: "\"" + $routeParams.customerID + "\""
-        });
-
 
         var self = this;
 
@@ -265,17 +255,6 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             }
             $scope.moneyOwed.rows[0].value = "0";
             $scope.itemsSold.rows[0].value = "0";
-            $scope.save();
-        };
-
-        $scope.payedCommission = function() {
-            var today = new Date();
-            for (var t in $scope.exchange_cms.transactions) {
-                for (var i in $scope.exchange_cms.transactions[t].items) {
-                    $scope.exchange_cms.transactions[t].items[i].payed_commission = today;
-                }
-            }
-            $scope.commissionOwed.rows[0].value = "0";
             $scope.save();
         };
     })
