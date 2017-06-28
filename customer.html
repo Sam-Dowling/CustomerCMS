@@ -6,7 +6,8 @@
             <p class="customer-info"><i class="fui-bubble"></i> {{exchange_cms.phone}}</p>
             <p class="customer-info"><i class="fui-calendar"></i> {{exchange_cms.account_start | date : 'mediumDate'}}</p>
             <div class="row padded">
-                <a class="btn btn-info col-xs-12" ng-click="payOutForSoldItems()">Pay Out for Sold Items</a>
+              <a class="btn btn-danger col-xs-6" ng-click="deleteCustomer()"><i class="fui-trash"></i> Delete Customer</a>
+                <a class="btn btn-info col-xs-6" ng-click="payOutForSoldItems()"><i class="fui-arrow-right"></i> Pay for Sold Items</a>
             </div>
             <div class="row padded">
                 <a class="btn btn-primary col-xs-12" href="#/transaction/new/{{exchange_cms._id}}"><i class="fui-plus"></i> New Transaction</a>
