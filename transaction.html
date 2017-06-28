@@ -2,6 +2,7 @@
     <div class="row well">
         <div class="col-xs-4">
             <a href="#/customer/view/{{exchange_cms._id}}" class="btn btn-primary"><i class="fui-arrow-left"></i> Back</a>
+            <button ng-click="deleteTransaction()" ng-really-message="Are you sure you want to DELETE every item in this transaction?" class="btn btn-danger" style=""><i class="fui-trash"></i>Delete Transaction</button>
         </div>
         <div class="col-xs-4 col-xs-offset-4">
             <button class="addfields btn btn-primary col-xs-5" ng-click="addNewItem()"><i class="fui-plus"></i> Add Item</button>
@@ -20,7 +21,7 @@
 
             <div class="form-group row">
                 <label class="col-form-label" for="info">Extra Information</label>
-                <input id="infoInput" type="text" name="address" ng-model="item.info" class="form-control" placeholder="Optional">
+                <input id="infoInput" type="text" name="address" ng-model="item.info" class="form-control" placeholder="Optional" />
             </div>
             <div class="form-group row">
 
@@ -42,7 +43,7 @@
                         <input id="soldInput" ng-model="item.sold" class="form-control sold-amount" ng-readonly="item.sold_date!=null" />
                     </div>
                 </div>
-                <button ng-click="soldItem($index)" class="btn btn-primary col-xs-3" ng-disabled="item.sold_date!=null"><i class="fui-heart"></i> Sold</button>
+                <button ng-click="soldItem($index)" class="btn btn-primary col-xs-3" ng-disabled="item.sold_date!=null"><i class="fui-heart"></i> Sold</button><button ng-click="removeItem($index)" class="btn btn-danger" style="float:right"><i class="fui-trash"></i></button>
             </div>
 
         </div>

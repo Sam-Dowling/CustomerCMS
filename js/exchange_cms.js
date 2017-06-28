@@ -161,6 +161,24 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
             }
         };
 
+        $scope.removeItem = function(index) {
+            if ($scope.exchange_cms.transactions[$scope.transactionID].items.length > 1) {
+                $scope.exchange_cms.transactions[$scope.transactionID].items.splice(index, 1);
+                for (var i = 0; i < $scope.exchange_cms.transactions[$scope.transactionID].items.length; i++) {
+                    $scope.exchange_cms.transactions[$scope.transactionID].items[i].id= i;
+                }
+            }
+        };
+
+        $scope.deleteTransaction = function() {
+          if(confirm('Are you sure you want to DELETE every item in this transaction?')){
+            $scope.exchange_cms.transactions.splice($scope.transactionID,1);
+              $scope.exchange_cms.update(function() {
+                  $location.path('/customer/view/' + $scope.exchange_cms._id);
+              });
+          }
+        };
+
         $scope.save = function() {
             for (var i in $scope.exchange_cms.transactions[$scope.transactionID].items) {
                 $scope.soldItem(i);

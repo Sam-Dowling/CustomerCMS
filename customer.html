@@ -6,8 +6,7 @@
             <p class="customer-info"><i class="fui-bubble"></i> {{exchange_cms.phone}}</p>
             <p class="customer-info"><i class="fui-calendar"></i> {{exchange_cms.account_start | date : 'mediumDate'}}</p>
             <div class="row padded">
-                <a class="btn btn-success col-xs-6" ng-click="payedCommission()">Pay Commission</a>
-                <a class="btn btn-info col-xs-6" ng-click="payOutForSoldItems()">Pay Out for Sold Items</a>
+                <a class="btn btn-info col-xs-12" ng-click="payOutForSoldItems()">Pay Out for Sold Items</a>
             </div>
             <div class="row padded">
                 <a class="btn btn-primary col-xs-12" href="#/transaction/new/{{exchange_cms._id}}"><i class="fui-plus"></i> New Transaction</a>
@@ -18,13 +17,10 @@
         <div class="row">
             <ul class="well list-group col-md-12">
                 <li class="list-group-item">
-                    <span class="badge">&euro; {{moneyOwed.rows[0].value || "0"}}</span> Amount Due For Sold Items
+                    <span class="badge">&euro; {{moneyOwed.rows[0].value || "0"}}</span> Price of Sold Items
                 </li>
                 <li class="list-group-item">
-                    <span class="badge">{{itemsSold.rows[0].value || "0"}}</span>Items Sold
-                </li>
-                <li class="list-group-item">
-                    <span class="badge">&euro; {{commissionOwed.rows[0].value || "0"}}</span> Commission To Pay
+                    <span class="badge">{{itemsSold.rows[0].value || "0"}}</span>Number of Items Sold
                 </li>
             </ul>
         </div>
