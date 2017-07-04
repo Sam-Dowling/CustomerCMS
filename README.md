@@ -14,7 +14,7 @@
       "map": "function (doc) {\n  emit(doc._id, 1);\n}"
     },
     "nextCustomerID": {
-      "reduce": "_count",
+      "reduce": "function (key, values, rereduce) {\n    // Return the maximum numeric value.\n    var max = -Infinity\n    for(var i = 0; i < values.length; i++)\n        if(typeof values[i] == 'number')\n            max = Math.max(values[i], max)\n    return max\n}",
       "map": "function (doc) {\n    emit(null, doc.account_number);\n}"
     },
     "moneyOwed": {

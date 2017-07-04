@@ -211,7 +211,7 @@ angular.module('exchange_cms', ['ngRoute', 'ngResource'])
       if (typeof $scope.next_customer_id.rows === 'undefined' || $scope.next_customer_id.rows == 0) {
         $scope.exchange_cms.account_number = 200;
       } else {
-        $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value + 200;
+        $scope.exchange_cms.account_number = $scope.next_customer_id.rows[0].value + 1;
       }
 
       $scope.exchange_cms.account_start = new Date();
